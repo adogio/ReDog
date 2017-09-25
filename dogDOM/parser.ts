@@ -1,8 +1,8 @@
-import './static';
+import S from './static';
 import element from './element';
 
-function parse(dom: string) {
-    let tree: element = new element(ROOT);
+export default function (dom: string): element {
+    let tree: element = new element(S.ROOT);
     let position: Array<string> = [];
     let pointer: element = tree;
     let dList: Array<string> = dom.split(/</);
@@ -17,23 +17,20 @@ function parse(dom: string) {
         } else if (node[0][0] == "/") {
             let lastposition = position[position.length - 1]
             if (node[0].substring(1) == lastposition) {
-                dList.unshift(node[1]);
-                position.pop();
                 pointer = pointer.getParent();
+                if (node[1]) {
+                    pointer.appendText(node[1]);
+                }
+                position.pop();
             } else {
                 throw "parse error, " + lastposition + "have no close tag";
             }
         } else {
-            let element = {
-                tag: node[0],
-                parent: pointer,
-                child: node[1] ? [{
-                    tag: TEXT,
-                    content: node[1]
-                }] : []
-            };
-            pointer = pointer.append(node[0], node[1] ? node[1] : undefined);
+            let a = new element(node[0], pointer);
+            if (node[1]) a.appendText(node[1]);
+            pointer = pointer.appendElement(a);
             position.push(node[0]);
         }
     }
+    return tree;
 }

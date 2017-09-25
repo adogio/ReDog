@@ -1,4 +1,7 @@
-const DIV = "div";
-const SPAN = "span";
-const TEXT = "text";
-const ROOT = "root";
+export default {
+    DIV: "div",
+    SPAN: "span",
+    TEXT: "text",
+    ROOT: "root"
+}
+

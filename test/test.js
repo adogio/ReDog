@@ -1,3 +1,4 @@
-require('../dogDOM').default;
+let dom = require('../dogDOM/dogDOM').default;
 
-parse("<div><span>dasd<span>test</span>123</span></div>");
+let a = new dom("<div><span>dasd<span>test</span>11<span>11</span>123</span></div>");
+console.log(a.render());

@@ -1,4 +1,4 @@
-import './static';
+import S from './static';
 
 class element {
     private tag: string;
@@ -8,7 +8,7 @@ class element {
     constructor(tag: string, parent?: element, text?: string) {
         this.tag = tag;
         if (parent) this.parent = parent;
-        if (text && tag == TEXT) {
+        if (text && tag == S.TEXT) {
             this.content = text;
         } else {
             this.childs = [];
@@ -16,14 +16,15 @@ class element {
     }
 
     public appendElement(child: element): element {
+        let node = child;
         this.childs.push(child);
-        return this;
+        return node;
     }
 
     public append(tag: string, text?: string): element {
         let node = null;
-        if (tag == TEXT) {
-            node = new element(TEXT, this, text);
+        if (tag == S.TEXT) {
+            node = new element(S.TEXT, this, text);
         } else {
             node = new element(tag, this);
         }
@@ -32,13 +33,13 @@ class element {
     }
 
     public appendText(content: string): element {
-        let textNode = new element(TEXT, this, content);
+        let textNode = new element(S.TEXT, this, content);
         this.childs.push(textNode);
         return textNode;
     }
 
     public g(): any {
-        return this.tag == TEXT ? this.content : this.childs;
+        return this.tag == S.TEXT ? this.content : this.childs;
     }
 
     public getParent(): element {
@@ -47,12 +48,12 @@ class element {
 
     public render(): string {
         let str = "";
-        if (this.tag != TEXT && this.tag != ROOT) str += "<" + this.tag + ">";
+        if (this.tag != S.TEXT && this.tag != S.ROOT) str += "<" + this.tag + ">";
         if (this.childs) {
             for (let i = 0; i < this.childs.length; i++) {
                 str += this.childs[i].render();
             }
-            if (this.tag != TEXT && this.tag != ROOT) str += "</" + this.tag + ">";
+            if (this.tag != S.TEXT && this.tag != S.ROOT) str += "</" + this.tag + ">";
         } else {
             str += this.content;
         }
