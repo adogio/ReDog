@@ -2,6 +2,8 @@
 :flags: Aaaaaanother MVVM framework for web
 
 
+In development, using dogDOM for virtual DOM engine, see github.com/adogio/dogDOM
+
 This repo besed on WTFPL  
 Do What the Fuck You Want to Public License
 
