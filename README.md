@@ -1,4 +1,10 @@
 # ReDog
 :flags: Aaaaaanother MVVM framework for web
 
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+
+This repo besed on WTFPL  
+Do What the Fuck You Want to Public License
+
+<a href="http://www.wtfpl.net/"><img
+       src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png"
+       width="80" height="15" alt="WTFPL" /></a>
