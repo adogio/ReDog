@@ -41,6 +41,10 @@ class element {
         return this.tag == TEXT ? this.content : this.childs;
     }
 
+    public getParent(): element {
+        return this.parent;
+    }
+
     public render(): string {
         let str = "";
         if (this.tag != TEXT && this.tag != ROOT) str += "<" + this.tag + ">";

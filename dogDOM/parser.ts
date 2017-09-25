@@ -1,11 +1,11 @@
 import './static';
 import element from './element';
 
-function parse(dom) {
-    let tree = new element(ROOT);
-    let position = [];
-    let pointer = tree;
-    let dList = dom.split(/</);
+function parse(dom: string) {
+    let tree: element = new element(ROOT);
+    let position: Array<string> = [];
+    let pointer: element = tree;
+    let dList: Array<string> = dom.split(/</);
     console.log(dList);
     while (dList.length > 0) {
         let dofList = dList.shift();
@@ -19,7 +19,7 @@ function parse(dom) {
             if (node[0].substring(1) == lastposition) {
                 dList.unshift(node[1]);
                 position.pop();
-                pointer = pointer.parent;
+                pointer = pointer.getParent();
             } else {
                 throw "parse error, " + lastposition + "have no close tag";
             }
@@ -32,8 +32,7 @@ function parse(dom) {
                     content: node[1]
                 }] : []
             };
-            pointer.child.push(element);
-            pointer = pointer.child[pointer.child.length - 1]
+            pointer = pointer.append(node[0], node[1] ? node[1] : undefined);
             position.push(node[0]);
         }
     }
