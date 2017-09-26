@@ -17,7 +17,7 @@ export default class {
         return this.rootElement.renderString();
     }
 
-    render(): HTMLElement {
+    render(): Node {
         return this.rootElement.render();
     }
 }

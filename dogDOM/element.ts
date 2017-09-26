@@ -1,13 +1,16 @@
 import S from './static';
+import props from './props';
 
 class element {
     private tag: string;
     private content: string;
+    private props: Array<props>;
     private parent: element;
     private childs: Array<element>;
     private dom: HTMLElement;
     constructor(tag: string, parent?: element, text?: string) {
         this.tag = tag;
+        this.props = [];
         this.dom = document.createElement(tag);
         if (parent) this.parent = parent;
         if (text && tag == S.TEXT) {
@@ -15,6 +18,11 @@ class element {
         } else {
             this.childs = [];
         }
+    }
+
+    public setProp(propName: string, propContent: any): element {
+        this.props.push(new props(propName, propContent));
+        return this;
     }
 
     public diff() {
@@ -64,7 +72,23 @@ class element {
         return this.dom;
     }
 
-    public render(): HTMLElement {
+    public render(): Node {
+        if (this.dom.tagName == S.TEXT.toUpperCase()) {
+            this.dom.innerText = this.content;
+            return this.dom.firstChild;
+        } else {
+            for (let i = 0; i < this.props.length; i++) {
+                this.dom[this.props[i].getPropsName()] = this.props[i].getPropsContent();
+            }
+        }
+        if (this.childs) {
+            for (let i = 0; i < this.childs.length; i++) {
+                let childElement: Node = this.childs[i].render();
+                if (childElement) this.dom.appendChild(childElement);
+            }
+        } else {
+            this.dom.innerHTML = this.content;
+        }
         return this.dom;
     }
 

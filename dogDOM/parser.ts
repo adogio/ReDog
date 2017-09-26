@@ -26,10 +26,21 @@ export default function (dom: string): element {
                 throw "parse error, " + lastposition + "have no close tag";
             }
         } else {
-            let a = new element(node[0], pointer);
+            let propsSplit = node[0].split(" ");
+            let a: element = null;
+            if (node[0].length == 1) {
+                a = new element(node[0], pointer);
+                position.push(node[0]);
+            } else {
+                a = new element(propsSplit[0], pointer);
+                position.push(propsSplit[0]);
+                for (let i = 1; i < propsSplit.length; i++) {
+                    let propLR = propsSplit[i].split("=");
+                    a.setProp(propLR[0], propLR[1] ? propLR[1] : true);
+                }
+            }
             if (node[1]) a.appendText(node[1]);
             pointer = pointer.appendElement(a);
-            position.push(node[0]);
         }
     }
     return tree;

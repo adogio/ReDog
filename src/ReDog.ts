@@ -4,8 +4,9 @@ export default class {
     private rootElement: HTMLElement;
     private rootDOM: vdom;
 
-    constructor(DOMElement) {
+    constructor(DOMElement: HTMLElement, DOM: string) {
         this.rootElement = DOMElement;
+        this.rootDOM = new vdom(DOM);
     }
 
     stringify(): string {
