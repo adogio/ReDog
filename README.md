@@ -1,6 +1,20 @@
 # ReDog
+
 :flags: Aaaaaanother MVVM framework for web
 
+Development Persentage: 30%
+
+Feature That Already Done:
+
+-   Virtual DOM
+-   Props
+-   HTML Parse
+-   Virtual DOM render
+
+Feature That Indevelopment:
+
+-   Two-way data bind
+-   Component
 
 In development, using dogDOM for virtual DOM engine, see github.com/adogio/dogDOM
 
