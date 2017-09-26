@@ -4,11 +4,20 @@ import parse from './parser';
 
 export default class {
     private rootElement: element;
+
     constructor(dom: string) {
         this.rootElement = parse(dom);
     }
 
-    render() {
+    getDomElement(): HTMLElement {
+        return this.rootElement.getNode();
+    }
+
+    renderString(): string {
+        return this.rootElement.renderString();
+    }
+
+    render(): HTMLElement {
         return this.rootElement.render();
     }
 }

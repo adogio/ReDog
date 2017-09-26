@@ -5,8 +5,10 @@ class element {
     private content: string;
     private parent: element;
     private childs: Array<element>;
+    private dom: HTMLElement;
     constructor(tag: string, parent?: element, text?: string) {
         this.tag = tag;
+        this.dom = document.createElement(tag);
         if (parent) this.parent = parent;
         if (text && tag == S.TEXT) {
             this.content = text;
@@ -58,12 +60,20 @@ class element {
         return this.parent;
     }
 
-    public render(): string {
+    public getNode(): HTMLElement {
+        return this.dom;
+    }
+
+    public render(): HTMLElement {
+        return this.dom;
+    }
+
+    public renderString(): string {
         let str = "";
         if (this.tag != S.TEXT && this.tag != S.ROOT) str += "<" + this.tag + ">";
         if (this.childs) {
             for (let i = 0; i < this.childs.length; i++) {
-                str += this.childs[i].render();
+                str += this.childs[i].renderString();
             }
             if (this.tag != S.TEXT && this.tag != S.ROOT) str += "</" + this.tag + ">";
         } else {

@@ -1,13 +1,18 @@
 import vdom from '../dogDOM/dogDOM';
 
 export default class {
-    private rootElement: any;
+    private rootElement: HTMLElement;
     private rootDOM: vdom;
-    constructor(docelement) {
-        this.rootElement = docelement;
+
+    constructor(DOMElement) {
+        this.rootElement = DOMElement;
     }
 
-    mount() {
-        this.rootElement.innerHTML = this.rootDOM.render();
+    stringify(): string {
+        return this.rootDOM.renderString();
+    }
+
+    mount(): void {
+        this.rootElement.appendChild(this.rootDOM.render());
     }
 }
