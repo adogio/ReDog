@@ -15,6 +15,18 @@ class element {
         }
     }
 
+    public diff() {
+
+    }
+
+    public change() {
+
+    }
+
+    public bind() {
+
+    }
+
     public appendElement(child: element): element {
         let node = child;
         this.childs.push(child);
