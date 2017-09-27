@@ -1,3 +1,6 @@
+import props from './props';
+import S from './static';
+
 class element {
     private tag: string;
     private content: string;

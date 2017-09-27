@@ -1,20 +1,25 @@
 module.exports = {
     devtool: 'inline-source-map',
 
-    entry: __dirname + "/src/ReDog.js", //已多次提及的唯一入口文件
+    entry: __dirname + "/test/test.ts", //已多次提及的唯一入口文件
 
     output: {
-        path: __dirname + "dist", //打包后的文件存放的地方
-        filename: "reDOO.js" //打包后输出文件的文件名
+        path: __dirname + "/dist", //打包后的文件存放的地方
+        filename: "bundle.js" //打包后输出文件的文件名
     },
 
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: ['.js'] // note if using webpack 1 you'd also need a '' in the array as well
+        extensions: ['.ts', '.js'] // note if using webpack 1 you'd also need a '' in the array as well
     },
     module: {
         loaders: [ // loaders will work with webpack 1 or 2; but will be renamed "rules" in future
             // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
+            {
+                test: /(\.ts)$/,
+                loader: 'ts-loader',
+                exclude: /node_modules/
+            },
             {
                 test: /(\.js)$/,
                 use: {

@@ -1,3 +1,6 @@
+import element from './element';
+import S from './static';
+
 const parser = function (dom: string): element {
     let tree: element = new element(S.ROOT);
     let position: Array<string> = [];

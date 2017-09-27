@@ -1,3 +1,7 @@
+import parse from './parser';
+import element from './element';
+import S from './static';
+
 class component {
     private rootElement: element;
     private _state: any;

@@ -1,5 +1,4 @@
 import S from './static';
-import element from './element';
 import component from './component';
 import parse from './parser';
 import props from './props';
