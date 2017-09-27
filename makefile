@@ -1,4 +1,4 @@
-ReDog : tscBuild testRun
+ReDog : webpackServer
 
 tscBuild :
 	tsc
@@ -13,3 +13,6 @@ clean :
 
 webpack :
 	node_modules/.bin/webpack
+
+webpackServer :
+	node_modules/.bin/webpack-dev-server --open

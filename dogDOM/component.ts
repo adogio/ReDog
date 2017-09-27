@@ -8,6 +8,7 @@ class component {
 
     constructor(dom: string) {
         this.rootElement = parse(dom);
+        this.rootElement.bind(this);
     }
 
     getDomElement(): HTMLElement {

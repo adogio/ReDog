@@ -6,7 +6,6 @@ const parser = function (dom: string): element {
     let position: Array<string> = [];
     let pointer: element = tree;
     let dList: Array<string> = dom.split(/</);
-    console.log(dList);
     while (dList.length > 0) {
         let dofList: string = dList.shift();
         let node: Array<string> = dofList.split(/>/);
@@ -29,17 +28,24 @@ const parser = function (dom: string): element {
             let propsSplit = node[0].split(" ");
             let a: element = null;
             if (node[0].length == 1) {
-                a = new element(node[0], pointer);
+                a = new element(node[0], pointer.getVeryParent(), pointer);
                 position.push(node[0]);
             } else {
-                a = new element(propsSplit[0], pointer);
+                a = new element(propsSplit[0], pointer.getVeryParent(), pointer);
                 position.push(propsSplit[0]);
                 for (let i = 1; i < propsSplit.length; i++) {
                     let propLR = propsSplit[i].split("=");
                     a.setProp(propLR[0], propLR[1] ? propLR[1] : true);
                 }
             }
-            if (node[1]) a.appendText(node[1]);
+            if (node[1]) {
+                let detect = node[1].split(/{|}/);
+                if (detect.length == 3) {
+                    a.appendText(detect[1]);
+                } else {
+                    a.appendText(node[1]);
+                }
+            }
             pointer = pointer.appendElement(a);
         }
     }

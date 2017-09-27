@@ -1,14 +1,18 @@
 import props from './props';
 import S from './static';
+import component from './component';
 
 class element {
     private tag: string;
     private content: string;
+    private component: component;
     private props: Array<props>;
     private parent: element;
+    private veryParent: element;
     private childs: Array<element>;
     private dom: HTMLElement;
-    constructor(tag: string, parent?: element, text?: string) {
+
+    constructor(tag: string, veryParent?: element, parent?: element, text?: string) {
         this.tag = tag;
         this.props = [];
         this.dom = document.createElement(tag);
@@ -33,8 +37,8 @@ class element {
 
     }
 
-    public bind() {
-
+    public bind(component: component) {
+        this.component = component;
     }
 
     public appendElement(child: element): element {
@@ -46,18 +50,24 @@ class element {
     public append(tag: string, text?: string): element {
         let node: element = null;
         if (tag == S.TEXT) {
-            node = new element(S.TEXT, this, text);
+            node = new element(S.TEXT, this.veryParent, this, text);
         } else {
-            node = new element(tag, this);
+            node = new element(tag, this.veryParent, this);
         }
         this.childs.push(node);
         return node;
     }
 
     public appendText(content: string): element {
-        let textNode: element = new element(S.TEXT, this, content);
+        let textNode: element = new element(S.TEXT, this.veryParent, this, content);
         this.childs.push(textNode);
         return textNode;
+    }
+
+    public appendController(variableName: string): element {
+
+        let controllerNode: element = new element(S.TEXT, this.veryParent, this, )
+        return
     }
 
     public g(): any {
@@ -66,6 +76,10 @@ class element {
 
     public getParent(): element {
         return this.parent;
+    }
+
+    public getVeryParent(): element {
+        return this.veryParent;
     }
 
     public getNode(): HTMLElement {
