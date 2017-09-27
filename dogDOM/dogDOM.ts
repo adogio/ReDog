@@ -2,7 +2,7 @@ import S from './static';
 import element from './element';
 import parse from './parser';
 
-export default class {
+class dogDOM {
     private rootElement: element;
 
     constructor(dom: string) {
@@ -21,3 +21,4 @@ export default class {
         return this.rootElement.render();
     }
 }
+export { dogDOM as default }

@@ -1,6 +1,5 @@
 ReDog : tscBuild testRun
 
-
 tscBuild :
 	tsc
 

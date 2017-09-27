@@ -38,13 +38,13 @@ class element {
     }
 
     public appendElement(child: element): element {
-        let node = child;
+        let node: element = child;
         this.childs.push(child);
         return node;
     }
 
     public append(tag: string, text?: string): element {
-        let node = null;
+        let node: element = null;
         if (tag == S.TEXT) {
             node = new element(S.TEXT, this, text);
         } else {
@@ -55,7 +55,7 @@ class element {
     }
 
     public appendText(content: string): element {
-        let textNode = new element(S.TEXT, this, content);
+        let textNode: element = new element(S.TEXT, this, content);
         this.childs.push(textNode);
         return textNode;
     }

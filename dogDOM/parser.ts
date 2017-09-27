@@ -1,21 +1,21 @@
 import S from './static';
 import element from './element';
 
-export default function (dom: string): element {
+const parser = function (dom: string): element {
     let tree: element = new element(S.ROOT);
     let position: Array<string> = [];
     let pointer: element = tree;
     let dList: Array<string> = dom.split(/</);
     console.log(dList);
     while (dList.length > 0) {
-        let dofList = dList.shift();
-        let node = dofList.split(/>/);
+        let dofList: string = dList.shift();
+        let node: Array<string> = dofList.split(/>/);
         if (node.length == 1) {
             if (node[0]) {
                 pointer = tree.appendText(node[0]);
             }
         } else if (node[0][0] == "/") {
-            let lastposition = position[position.length - 1]
+            let lastposition: string = position[position.length - 1]
             if (node[0].substring(1) == lastposition) {
                 pointer = pointer.getParent();
                 if (node[1]) {
@@ -45,3 +45,4 @@ export default function (dom: string): element {
     }
     return tree;
 }
+export { parser as default }
