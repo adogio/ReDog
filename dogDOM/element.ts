@@ -1,6 +1,3 @@
-import S from './static';
-import props from './props';
-
 class element {
     private tag: string;
     private content: string;

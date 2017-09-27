@@ -1,24 +1,26 @@
 import S from './static';
 import element from './element';
+import component from './component';
 import parse from './parser';
+import props from './props';
 
 class dogDOM {
-    private rootElement: element;
+    private rootComponent: component;
 
     constructor(dom: string) {
-        this.rootElement = parse(dom);
+        this.rootComponent = new component(dom);
     }
 
     getDomElement(): HTMLElement {
-        return this.rootElement.getNode();
+        return this.rootComponent.getDomElement();
     }
 
     renderString(): string {
-        return this.rootElement.renderString();
+        return this.rootComponent.renderString();
     }
 
     render(): Node {
-        return this.rootElement.render();
+        return this.rootComponent.render();
     }
 }
 export { dogDOM as default }
