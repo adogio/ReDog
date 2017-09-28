@@ -1,8 +1,10 @@
 import element from './element';
 import S from './static';
+import component from './component';
 
-const parser = function (dom: string): element {
+const parser = function (dom: string, component: component): element {
     let tree: element = new element(S.ROOT);
+    tree.bind(component);
     let position: Array<string> = [];
     let pointer: element = tree;
     let dList: Array<string> = dom.split(/</);
@@ -41,7 +43,7 @@ const parser = function (dom: string): element {
             if (node[1]) {
                 let detect = node[1].split(/{|}/);
                 if (detect.length == 3) {
-                    a.appendText(detect[1]);
+                    a.appendController(detect[1]);
                 } else {
                     a.appendText(node[1]);
                 }

@@ -6,7 +6,7 @@ export default class {
 
     constructor(DOMElement: HTMLElement, DOM: string) {
         this.rootElement = DOMElement;
-        this.rootDOM = new vdom(DOM);
+        this.rootDOM = new vdom(DOM, this);
     }
 
     stringify(): string {
@@ -14,6 +14,12 @@ export default class {
     }
 
     mount(): void {
+        this.rootElement.innerHTML = "";
+        this.rootElement.appendChild(this.rootDOM.render());
+    }
+
+    reRender(): void {
+        this.rootElement.innerHTML = "";
         this.rootElement.appendChild(this.rootDOM.render());
     }
 }

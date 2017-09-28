@@ -10,6 +10,7 @@ clean :
 	rm -rf dogDOM/*.js dogDOM/*.js.map
 	rm -rf src/*.js src/*.js.map
 	rm -rf dist/*.js dist/*.js.map
+	rm -rf test/bundle.js
 
 webpack :
 	node_modules/.bin/webpack

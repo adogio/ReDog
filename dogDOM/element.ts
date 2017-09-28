@@ -17,6 +17,7 @@ class element {
         this.props = [];
         this.dom = document.createElement(tag);
         if (parent) this.parent = parent;
+        if (veryParent) { this.veryParent = veryParent; } else { this.veryParent = this }
         if (text && tag == S.TEXT) {
             this.content = text;
         } else {
@@ -29,12 +30,10 @@ class element {
         return this;
     }
 
-    public diff() {
-
-    }
-
-    public change() {
-
+    public updateContent(content: string): element {
+        this.content = content;
+        this.veryParent.getComponent().setRenderQueue();
+        return this;
     }
 
     public bind(component: component) {
@@ -65,9 +64,11 @@ class element {
     }
 
     public appendController(variableName: string): element {
-
-        let controllerNode: element = new element(S.TEXT, this.veryParent, this, )
-        return
+        let defaultVariable = this.veryParent.getComponent().state[variableName];
+        let controllerNode: element = new element(S.TEXT, this.veryParent, this, defaultVariable)
+        this.veryParent.getComponent().bind(variableName, controllerNode);
+        this.childs.push(controllerNode);
+        return this;
     }
 
     public g(): any {
@@ -82,11 +83,16 @@ class element {
         return this.veryParent;
     }
 
+    public getComponent(): component {
+        return this.component;
+    }
+
     public getNode(): HTMLElement {
         return this.dom;
     }
 
     public render(): Node {
+        this.dom = document.createElement(this.tag);
         if (this.dom.tagName == S.TEXT.toUpperCase()) {
             this.dom.innerText = this.content;
             return this.dom.firstChild;
