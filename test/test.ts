@@ -6,7 +6,7 @@ let a = new redog(document.getElementById("root"),
         <span id=12312 style=color:red>{test}</span>1231231\
         </div>11\
         <span style=color:purple>11</span>123\
-        </span>\
+        <button onClick=alert(123) style=color:red>test</button></span>\
     </div>"
 );
 a.mount()
